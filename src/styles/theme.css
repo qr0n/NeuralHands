@@ -1,0 +1,54 @@
+/* Global theme tokens and gradients (Tailwind v4 safely reads these) */
+
+:root {
+  --bg-start: #faf7ff;            /* very light lavender */
+  --bg-end:   #ffffff;
+  --fg:       #1a102b;            /* eggplant text */
+  --muted-fg: #5b4a77;
+
+  --primary:         #7c3aed;     /* purple-600 */
+  --primary-600:     #7c3aed;
+  --primary-700:     #6d28d9;
+  --primary-800:     #5b21b6;
+  --ring:            255 92% 60%;
+  --card:            #ffffffb3;   /* glass */
+  --card-border:     #e8dffc;
+}
+
+.dark {
+  --bg-start: #0f0a19;        /* deep purple blue */
+  --bg-end:   #140f22;
+  --fg:       #f7f2ff;
+  --muted-fg: #c8b6ff;
+
+  --primary:     #a78bfa;     /* purple-300 */
+  --primary-600: #8b5cf6;
+  --primary-700: #7c3aed;
+  --primary-800: #6d28d9;
+  --card:        #0f0a19bf;
+  --card-border: #2a1f40;
+}
+
+html, body { min-height: 100%; }
+
+body {
+  color: var(--fg);
+  background-image: radial-gradient(1200px 600px at 10% -10%, var(--bg-start), transparent 45%),
+                    radial-gradient(1000px 700px at 110% 10%, var(--bg-start), transparent 45%),
+                    linear-gradient(135deg, var(--bg-start) 0%, var(--bg-end) 100%);
+}
+
+.card-surface {
+  background: var(--card);
+  border: 1px solid var(--card-border);
+  backdrop-filter: blur(8px);
+}
+
+.primary-btn {
+  background: var(--primary-700);
+  color: white;
+}
+.primary-btn:hover { opacity: .95; }
+.outline-btn {
+  border: 1px solid var(--card-border);
+}
