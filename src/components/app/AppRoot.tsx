@@ -74,7 +74,7 @@ export default function AppRoot() {
     appState === "main" ? goHome : undefined; // ✅ only clickable inside app
 
   return (
-    <div className="min-h-screen text-black transition-colors dark:text-white">
+    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-purple-900 to-gray-900 text-white">
       <AppHeader onGoTranslator={goTranslatorOpen} onGoDashboard={headerHome} />
 
       <main className="mx-auto max-w-5xl px-4 pb-28 pt-6">
@@ -104,7 +104,7 @@ export default function AppRoot() {
               <div className="mt-6 text-center">
                 <button
                   onClick={goTranslatorOpen}
-                  className="rounded-lg border px-4 py-2 text-sm hover:bg-white/40 dark:hover:bg-white/10"
+                  className="rounded-lg border border-gray-600 px-4 py-2 text-sm text-white hover:bg-white/10 transition-colors"
                 >
                   Try the Translator Without Signing Up
                 </button>
@@ -224,30 +224,31 @@ function AuthPanel({
   const loginDisabled = pwd.length < 8 || !email;
   const signupDisabled = pwd.length < 8 || !email || !username || !agree;
 
-  const baseBtn =
-    "rounded-lg px-3 py-1.5 text-sm transition-colors";
-  const activeBtn =
-    "bg-[var(--primary-700)] text-white";
-  const inactiveBtn =
-    "border text-[var(--primary-700)] hover:bg-white/40 dark:text-white/90 dark:hover:bg-white/10";
-
   return (
     <motion.div
       initial={{ opacity: 0, y: 8 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.25 }}
-      className="mx-auto mt-10 max-w-md rounded-2xl border bg-white/80 p-6 shadow backdrop-blur dark:bg-black/50"
+      className="mx-auto mt-10 max-w-md rounded-2xl bg-gray-800/50 backdrop-blur border border-gray-700 p-6 shadow-2xl"
     >
-      {/* Tabs: visible and readable in light & dark */}
+      {/* Tabs */}
       <div className="mb-4 flex gap-2">
         <button
-          className={`${baseBtn} ${tab === "login" ? activeBtn : inactiveBtn}`}
+          className={`rounded-lg px-4 py-2 text-sm font-medium transition-all ${
+            tab === "login"
+              ? "bg-gradient-to-r from-purple-500 to-pink-500 text-white"
+              : "border border-gray-600 text-gray-300 hover:bg-white/10"
+          }`}
           onClick={() => setTab("login")}
         >
           Login
         </button>
         <button
-          className={`${baseBtn} ${tab === "signup" ? activeBtn : inactiveBtn}`}
+          className={`rounded-lg px-4 py-2 text-sm font-medium transition-all ${
+            tab === "signup"
+              ? "bg-gradient-to-r from-purple-500 to-pink-500 text-white"
+              : "border border-gray-600 text-gray-300 hover:bg-white/10"
+          }`}
           onClick={() => setTab("signup")}
         >
           Sign Up
@@ -257,9 +258,9 @@ function AuthPanel({
       <div className="space-y-3">
         {tab === "signup" && (
           <div>
-            <label className="text-xs">Username</label>
+            <label className="text-sm text-gray-300 font-medium">Username</label>
             <input
-              className="mt-1 w-full rounded-lg border bg-transparent p-2"
+              className="mt-1 w-full rounded-lg border border-gray-600 bg-gray-900/50 text-white p-2 focus:border-purple-500 outline-none transition-colors"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
               placeholder="Choose a handle"
@@ -269,23 +270,25 @@ function AuthPanel({
         )}
 
         <div>
-          <label className="text-xs">Email</label>
+          <label className="text-sm text-gray-300 font-medium">Email</label>
           <input
-            className="mt-1 w-full rounded-lg border bg-transparent p-2"
+            className="mt-1 w-full rounded-lg border border-gray-600 bg-gray-900/50 text-white p-2 focus:border-purple-500 outline-none transition-colors"
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
+            placeholder="your@email.com"
             required
           />
         </div>
 
         <div>
-          <label className="text-xs">Password (min 8 chars)</label>
+          <label className="text-sm text-gray-300 font-medium">Password (min 8 chars)</label>
           <input
-            className="mt-1 w-full rounded-lg border bg-transparent p-2"
+            className="mt-1 w-full rounded-lg border border-gray-600 bg-gray-900/50 text-white p-2 focus:border-purple-500 outline-none transition-colors"
             type="password"
             value={pwd}
             onChange={(e) => setPwd(e.target.value)}
+            placeholder="••••••••"
             minLength={8}
             required
           />
@@ -293,22 +296,23 @@ function AuthPanel({
 
         {tab === "signup" && (
           <>
-            <div className="text-[12px] text-gray-700 dark:text-gray-400">
+            <div className="text-xs text-gray-300">
               By creating an account, you agree to our{" "}
-              <button onClick={openPrivacy} className="underline underline-offset-2">
+              <button onClick={openPrivacy} className="text-purple-400 underline underline-offset-2 hover:text-purple-300">
                 Privacy Policy
               </button>{" "}
               and{" "}
-              <button onClick={openTerms} className="underline underline-offset-2">
+              <button onClick={openTerms} className="text-purple-400 underline underline-offset-2 hover:text-purple-300">
                 Terms of Service
               </button>
               .
             </div>
-            <label className="mt-2 flex items-start gap-2 text-[12px]">
+            <label className="mt-2 flex items-start gap-2 text-xs text-gray-300">
               <input
                 type="checkbox"
                 checked={agree}
                 onChange={(e) => setAgree(e.target.checked)}
+                className="mt-0.5 rounded"
               />
               <span>I have read and agree to the Privacy Policy and Terms of Service.</span>
             </label>
@@ -320,10 +324,10 @@ function AuthPanel({
             whileTap={{ scale: loginDisabled ? 1 : 0.98 }}
             disabled={loginDisabled}
             onClick={() => onLogin(email, pwd)}
-            className={`mt-2 w-full rounded-lg px-4 py-2 text-sm ${
+            className={`mt-2 w-full rounded-lg px-4 py-3 text-sm font-semibold transition-all ${
               loginDisabled
-                ? "cursor-not-allowed opacity-50"
-                : "bg-[var(--primary-700)] text-white hover:opacity-95"
+                ? "cursor-not-allowed opacity-50 bg-gray-700 text-gray-400"
+                : "bg-gradient-to-r from-purple-500 to-pink-500 text-white hover:from-purple-600 hover:to-pink-600"
             }`}
           >
             Log In
@@ -333,10 +337,10 @@ function AuthPanel({
             whileTap={{ scale: signupDisabled ? 1 : 0.98 }}
             disabled={signupDisabled}
             onClick={() => onRegister(email, pwd, username)}
-            className={`mt-2 w-full rounded-lg px-4 py-2 text-sm ${
+            className={`mt-2 w-full rounded-lg px-4 py-3 text-sm font-semibold transition-all ${
               signupDisabled
-                ? "cursor-not-allowed opacity-50"
-                : "bg-[var(--primary-700)] text-white hover:opacity-95"
+                ? "cursor-not-allowed opacity-50 bg-gray-700 text-gray-400"
+                : "bg-gradient-to-r from-purple-500 to-pink-500 text-white hover:from-purple-600 hover:to-pink-600"
             }`}
           >
             Create Account

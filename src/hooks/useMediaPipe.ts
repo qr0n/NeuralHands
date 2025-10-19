@@ -27,7 +27,7 @@ export interface UseMediaPipeOptions {
   onResults?: (results: HandLandmarks | null) => void;
 }
 
-export function useMediaPipe(videoRef: React.RefObject<HTMLVideoElement>, options: UseMediaPipeOptions = {}) {
+export function useMediaPipe(videoRef: React.RefObject<HTMLVideoElement | null>, options: UseMediaPipeOptions = {}) {
   const {
     maxNumHands = 1,
     modelComplexity = 1,

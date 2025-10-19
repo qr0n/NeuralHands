@@ -8,7 +8,7 @@ import useMediaPipe, { HandLandmarks } from './useMediaPipe';
 import { getMLPModel, extractLandmarkFeatures, PredictionResult } from '@/lib/mlp-model';
 
 export interface ASLRecognitionOptions {
-  videoRef: React.RefObject<HTMLVideoElement>;
+  videoRef: React.RefObject<HTMLVideoElement | null>;
   enabled?: boolean;
   confidenceThreshold?: number;
   cooldownMs?: number; // Prevent duplicate predictions
