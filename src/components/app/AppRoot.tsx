@@ -90,16 +90,6 @@ export default function AppRoot() {
               <AuthPanel
                 onLogin={handleLogin}
                 onRegister={handleRegister}
-                openPrivacy={() => {
-                  setAppState("main");
-                  setCurrentView("privacy");
-                  setGuestMode(true); // no bottom nav
-                }}
-                openTerms={() => {
-                  setAppState("main");
-                  setCurrentView("terms");
-                  setGuestMode(true);
-                }}
               />
               <div className="mt-6 text-center">
                 <button
@@ -207,13 +197,9 @@ function MainRouter({
 function AuthPanel({
   onLogin,
   onRegister,
-  openPrivacy,
-  openTerms,
 }: {
   onLogin: (email: string, password: string) => void;
   onRegister: (email: string, password: string, username: string) => void;
-  openPrivacy: () => void;
-  openTerms: () => void;
 }) {
   const [tab, setTab] = useState<"login" | "signup">("login");
   const [email, setEmail] = useState("");
@@ -298,13 +284,13 @@ function AuthPanel({
           <>
             <div className="text-xs text-gray-300">
               By creating an account, you agree to our{" "}
-              <button onClick={openPrivacy} className="text-purple-400 underline underline-offset-2 hover:text-purple-300">
+              <a href="/privacy" target="_blank" rel="noopener noreferrer" className="text-purple-400 underline underline-offset-2 hover:text-purple-300">
                 Privacy Policy
-              </button>{" "}
+              </a>{" "}
               and{" "}
-              <button onClick={openTerms} className="text-purple-400 underline underline-offset-2 hover:text-purple-300">
+              <a href="/terms" target="_blank" rel="noopener noreferrer" className="text-purple-400 underline underline-offset-2 hover:text-purple-300">
                 Terms of Service
-              </button>
+              </a>
               .
             </div>
             <label className="mt-2 flex items-start gap-2 text-xs text-gray-300">

@@ -14,7 +14,7 @@ export default function BottomNav({
   setCurrent,
 }: { current: MainView; setCurrent: (v: MainView) => void }) {
   return (
-    <nav className="fixed inset-x-0 bottom-0 z-40 mx-auto w-full max-w-5xl border-t border-gray-700 bg-gray-800/90 p-2 backdrop-blur shadow-2xl">
+    <nav className="fixed inset-x-0 bottom-0 z-40 mx-auto w-full max-w-5xl border-t border-gray-700 bg-gray-800/90 p-2 backdrop-blur shadow-2xl rounded-t-2xl">
       <ul className="grid grid-cols-5">
         {items.map((it) => {
           const active = current === it.key;

@@ -10,6 +10,12 @@ import * as crypto from 'crypto';
 const USERS_FILE = path.join(process.cwd(), 'data', 'users.json');
 const SESSIONS_FILE = path.join(process.cwd(), 'data', 'sessions.json');
 
+// Debug logging
+console.log('Auth module loaded');
+console.log('Working directory:', process.cwd());
+console.log('Users file path:', USERS_FILE);
+console.log('Sessions file path:', SESSIONS_FILE);
+
 export interface User {
   id: string;
   email: string;
@@ -37,8 +43,13 @@ export interface UserData {
 // Ensure data directory exists
 function ensureDataDir() {
   const dataDir = path.join(process.cwd(), 'data');
+  console.log('Checking data directory:', dataDir);
   if (!fs.existsSync(dataDir)) {
+    console.log('Data directory does not exist, creating...');
     fs.mkdirSync(dataDir, { recursive: true });
+    console.log('Data directory created');
+  } else {
+    console.log('Data directory exists');
   }
 }
 
@@ -55,8 +66,20 @@ function loadUsers(): User[] {
 
 // Save users to JSON file
 function saveUsers(users: User[]) {
-  ensureDataDir();
-  fs.writeFileSync(USERS_FILE, JSON.stringify(users, null, 2));
+  try {
+    ensureDataDir();
+    console.log('Saving users to:', USERS_FILE);
+    console.log('Users data:', JSON.stringify(users, null, 2));
+    fs.writeFileSync(USERS_FILE, JSON.stringify(users, null, 2));
+    console.log('Users saved successfully');
+    
+    // Verify the write
+    const verification = fs.readFileSync(USERS_FILE, 'utf-8');
+    console.log('Verification read:', verification);
+  } catch (error) {
+    console.error('Error saving users:', error);
+    throw error;
+  }
 }
 
 // Load sessions from JSON file
@@ -89,25 +112,34 @@ function generateSessionId(): string {
 // Register new user
 export function registerUser(email: string, password: string, name: string): { success: boolean; error?: string; user?: UserData } {
   try {
+    console.log('=== Register User Called ===');
+    console.log('Email:', email);
+    console.log('Name:', name);
+    
     const users = loadUsers();
+    console.log('Current users count:', users.length);
     
     // Check if user already exists
     if (users.find(u => u.email.toLowerCase() === email.toLowerCase())) {
+      console.log('User already exists');
       return { success: false, error: 'Email already registered' };
     }
     
     // Validate email
     if (!email.includes('@') || !email.includes('.')) {
+      console.log('Invalid email format');
       return { success: false, error: 'Invalid email address' };
     }
     
     // Validate password
     if (password.length < 6) {
+      console.log('Password too short');
       return { success: false, error: 'Password must be at least 6 characters' };
     }
     
     // Validate name
     if (!name.trim()) {
+      console.log('Name is empty');
       return { success: false, error: 'Name is required' };
     }
     
@@ -120,8 +152,13 @@ export function registerUser(email: string, password: string, name: string): { s
       createdAt: Date.now(),
     };
     
+    console.log('New user created:', { id: user.id, email: user.email, name: user.name });
+    
     users.push(user);
+    console.log('Users array length after push:', users.length);
+    
     saveUsers(users);
+    console.log('Registration complete');
     
     return {
       success: true,

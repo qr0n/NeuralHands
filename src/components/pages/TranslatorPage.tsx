@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useCameras } from "@/hooks/useCameras";
 import CameraFeed from "@/components/media/CameraFeed";
 import GeminiFeedbackDisplay from "@/components/media/GeminiFeedbackDisplay";
+import { validateGeminiFeedback } from "@/lib/gemini-utils";
 import Link from "next/link";
 
 interface GeminiFeedback {
@@ -126,7 +127,16 @@ export default function TranslatorPage({
           return;
         }
 
-        setGeminiFeedback(data);
+        // Validate and sanitize the Gemini response
+        const validatedFeedback = validateGeminiFeedback(data);
+        
+        if (!validatedFeedback) {
+          setOutput("Received invalid feedback format. Please try again.");
+          setIsAnalyzing(false);
+          return;
+        }
+
+        setGeminiFeedback(validatedFeedback);
         setOutput("Analysis complete! See feedback below.");
         setShowSummary(false);
       } catch (error: any) {
@@ -192,7 +202,7 @@ export default function TranslatorPage({
               onClick={onGoAuth}
               className="px-4 py-2 bg-gray-700 hover:bg-gray-600 text-white rounded-lg font-medium shadow-lg"
             >
-              Back to Start
+              Exit
             </motion.button>
           </div>
         </motion.div>

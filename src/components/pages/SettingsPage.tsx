@@ -77,15 +77,15 @@ export default function SettingsPage({ userId, go }: { userId: string; go: (v: "
 
       <Section title="Privacy & Security">
         <div className="flex flex-wrap gap-2">
-          <a className="rounded-lg border border-gray-600 px-4 py-2 text-sm text-white hover:bg-white/10 transition-colors" href="#" target="_blank">
+          <a className="rounded-lg border border-gray-600 px-4 py-2 text-sm text-white hover:bg-white/10 transition-colors" href="/privacy" target="_blank">
             Privacy Policy
           </a>
-          <a className="rounded-lg border border-gray-600 px-4 py-2 text-sm text-white hover:bg-white/10 transition-colors" href="#" target="_blank">
+          <a className="rounded-lg border border-gray-600 px-4 py-2 text-sm text-white hover:bg-white/10 transition-colors" href="/terms" target="_blank">
             Terms of Service
           </a>
-          <button className="rounded-lg border border-gray-600 px-4 py-2 text-sm text-white hover:bg-white/10 transition-colors">
+          <a className="rounded-lg border border-gray-600 px-4 py-2 text-sm text-white hover:bg-white/10 transition-colors" href="/settings/data" target="_blank">
             Data Management
-          </button>
+          </a>
         </div>
       </Section>
 
