@@ -15,7 +15,7 @@ from PIL import Image
 from pydantic import BaseModel
 
 app = FastAPI()
-client = genai.Client(api_key="AIzaSyCxGu9BRMZcZm5wl2-Cxq6NGKMtxoZ6kh8")
+client = genai.Client(api_key="")
 
 
 def sanitize_gemini_response(text: str) -> str:
