@@ -113,7 +113,9 @@ export default function TranslatorPage({
       setOutput("Your signing is being analyzed by Gemini...");
 
       try {
-        const response = await fetch("http://localhost:8000/analyze", {
+        // Use environment variable for API URL, fallback to deployed domain
+        const apiUrl = process.env.NEXT_PUBLIC_API_URL || "https://neuralhands.ir0n.xyz";
+        const response = await fetch(`${apiUrl}/analyze`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ frames: capturedFrames }),
@@ -140,7 +142,8 @@ export default function TranslatorPage({
         setOutput("Analysis complete! See feedback below.");
         setShowSummary(false);
       } catch (error: any) {
-        setOutput(`Network error: ${error.message}. Make sure backend is running on port 8000.`);
+        const apiUrl = process.env.NEXT_PUBLIC_API_URL || "https://neuralhands.ir0n.xyz";
+        setOutput(`Network error: ${error.message}. Make sure backend is accessible at ${apiUrl}`);
       } finally {
         setIsAnalyzing(false);
       }

@@ -34,7 +34,7 @@ INFO:     Started reloader process
 Open a new terminal and test the API:
 
 ```bash
-curl http://localhost:8000/
+curl http://neuralhands.ir0n.xyz:8000/
 ```
 
 ## Running the Frontend
@@ -59,7 +59,7 @@ npm run dev
 
 ### 4. Open in browser
 
-Navigate to: http://localhost:3000
+Navigate to: http://neuralhands.ir0n.xyz:3000
 
 ## How to Use the Feature
 
@@ -173,7 +173,7 @@ After testing this works:
 ## Support
 
 If you encounter issues:
-1. Check backend is running: `curl http://localhost:8000`
+1. Check backend is running: `curl http://neuralhands.ir0n.xyz:8000`
 2. Check browser console for errors (F12)
 3. Check backend logs in terminal
 4. Verify API key is valid in `test.py`

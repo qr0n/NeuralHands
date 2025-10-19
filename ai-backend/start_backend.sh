@@ -12,14 +12,14 @@ if ! command -v uvicorn &> /dev/null; then
     pip install fastapi uvicorn google-generativeai pillow python-multipart
 fi
 
-echo "✅ Starting server on http://localhost:8000"
+echo "✅ Starting server on http://neuralhands.ir0n.xyz:8000"
 echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 echo ""
 echo "📝 API Endpoint:"
-echo "   POST http://localhost:8000/analyze"
+echo "   POST http://neuralhands.ir0n.xyz:8000/analyze"
 echo ""
 echo "🌐 Frontend should connect to:"
-echo "   http://localhost:8000"
+echo "   http://neuralhands.ir0n.xyz:8000"
 echo ""
 echo "⚠️  Press CTRL+C to stop the server"
 echo ""

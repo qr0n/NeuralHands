@@ -15,7 +15,7 @@ from PIL import Image
 from pydantic import BaseModel
 
 app = FastAPI()
-client = genai.Client(api_key="")
+client = genai.Client(api_key="AIzaSyCxGu9BRMZcZm5wl2-Cxq6NGKMtxoZ6kh8")
 
 
 def sanitize_gemini_response(text: str) -> str:
@@ -157,57 +157,7 @@ Be encouraging, specific, and constructive. Analyze the COMPLETE sequence."""
         )
 
 
-# ---- Frontend (HTML + JS) ----
-# Save this as index.html and open in browser. It streams webcam frames via WebSocket.
+if __name__ == "__main__":
+    import uvicorn
 
-"""
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8" />
-    <title>Gemini Live Sign Interpreter (PoC)</title>
-    <style>
-      body { background:#000; color:#fff; text-align:center; font-family:sans-serif; }
-      video { border-radius: 12px; width: 480px; height: 360px; margin-top: 20px; }
-      #output { margin-top: 20px; font-size: 1.4rem; }
-    </style>
-  </head>
-  <body>
-    <h1>Gemini Live Sign Interpreter</h1>
-    <video id="video" autoplay muted></video>
-    <div id="output">Waiting for stream...</div>
-    <script>
-      const video = document.getElementById('video');
-      const output = document.getElementById('output');
-      const ws = new WebSocket('ws://localhost:8000/stream');
-
-      navigator.mediaDevices.getUserMedia({ video: true }).then(stream => {
-        video.srcObject = stream;
-      });
-
-      ws.onmessage = (msg) => {
-        output.innerText = msg.data;
-      };
-
-      function captureAndSend() {
-        const canvas = document.createElement('canvas');
-        canvas.width = video.videoWidth;
-        canvas.height = video.videoHeight;
-        canvas.getContext('2d').drawImage(video, 0, 0);
-        const frame = canvas.toDataURL('image/jpeg', 0.6);
-        ws.send(frame);
-      }
-
-      setInterval(captureAndSend, 1000); // 1 FPS for PoC
-    </script>
-  </body>
-</html>
-"""
-
-# -------------------------------------------------------------
-# ✅ How to Run This Proof of Concept
-# 1. Save the backend as `server.py` and run it with Uvicorn.
-# 2. Save the frontend as `index.html` and open it in a browser.
-# 3. Allow camera access.
-# 4. Watch Gemini interpret frames in real time.
-# -------------------------------------------------------------
+    uvicorn.run(app, host="0.0.0.0", port=8000)

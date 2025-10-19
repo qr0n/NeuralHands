@@ -125,7 +125,7 @@ Capture frames @ 3 FPS (canvas.toDataURL)
     ↓
 Store as base64 array
     ↓
-POST http://localhost:8000/analyze
+POST http://neuralhands.ir0n.xyz:8000/analyze
     ↓
 FastAPI Backend (test.py)
     ↓
@@ -173,7 +173,7 @@ Display in GeminiFeedbackDisplay component
 ### Backend Testing:
 - [ ] Start backend: `uvicorn test:app --reload --port 8000`
 - [ ] Verify server starts without errors
-- [ ] Test endpoint directly: `curl http://localhost:8000/analyze`
+- [ ] Test endpoint directly: `curl http://neuralhands.ir0n.xyz:8000/analyze`
 - [ ] Check CORS headers are set correctly
 
 ### Integration Testing:
@@ -276,7 +276,7 @@ npm run dev
 ```
 
 ### 3. Test the Feature:
-1. Open http://localhost:3000
+1. Open http://neuralhands.ir0n.xyz:3000
 2. Navigate to Translator (try as guest or login)
 3. Select "Cloud (Google AI)" from Model dropdown
 4. Start camera and begin recording

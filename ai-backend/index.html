@@ -249,7 +249,7 @@
           status.innerHTML = '<div class="loader"></div> Your signing is being processed...';
           
           try {
-            const response = await fetch('http://localhost:8000/analyze', {
+            const response = await fetch('http://neuralhands.ir0n.xyz:8000/analyze', {
               method: 'POST',
               headers: { 'Content-Type': 'application/json' },
               body: JSON.stringify({ frames: capturedFrames })
