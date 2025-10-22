@@ -1,0 +1,9 @@
+# Ignore environment variable files
+src/config/.env.dev
+src/config/.env.prod
+src/config/.env.test
+src/config/.
+node_modules/
+tests/
+src/config/serviceAccountKey.json
+
